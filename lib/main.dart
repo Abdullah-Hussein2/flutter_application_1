@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           backgroundColor: Colors.black12,
           title: Text(
-            "This is a text",
+            "This is a te98797xt",
             style: TextStyle(
               color: Colors.blue,
               fontSize: 24.0,
