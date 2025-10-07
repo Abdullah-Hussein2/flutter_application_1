@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           backgroundColor: Colors.black12,
           title: Text(
-            "FaceBook",
+            "This is a text",
             style: TextStyle(
               color: Colors.blue,
               fontSize: 24.0,
