@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'secPage.dart';
 import 'thiredPage.dart';
+
 void main() {
   runApp(const MaterialApp(title: 'Navigation Basics', home: MyApp()));
 }
@@ -8,6 +9,13 @@ void main() {
 void printThis() {
   print("TEST");
 }
+
+
+
+
+
+
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -22,12 +30,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black12,
           title: Text(
-            "This is a te98797xt",
+            "Banking app",
             style: TextStyle(
               color: Colors.blue,
               fontSize: 24.0,
@@ -53,56 +60,38 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: Icon(Icons.wallet),
-              label: Text('help'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => const SecPage(),
-                  ),
-                );
-              },
-            ),
-            ElevatedButton.icon(
-              icon: Icon(Icons.wallet),
-              label: Text('Open'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => const FirstRoute(),
-                  ),
-                );
-              },
-            ),
-            
-            
-          
-        ]),
-        // body: Center(
-          
-        //   child: ElevatedButton(
-        //     child: Icon(Icons.wallet, size: 50, color: Colors.black),
-            
-
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute<void>(
-        //           builder: (context) => const SecPage(),
-        //         ),
-        //       );
-        //     },
-        //   ),
-        //   ElevatedButton(child: Icon(Icons.open_in_new),
-        //   , onPressed: () {  },)
-        // ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                icon: Icon(Icons.wallet),
+                label: Text('help'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => const SecPage(),
+                    ),
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                icon: Icon(Icons.wallet),
+                label: Text('Open'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => const FirstRoute(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
 
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
