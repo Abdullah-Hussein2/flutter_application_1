@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/messengermain.dart';
 import 'secPage.dart';
-import 'thiredPage.dart';
 
 void main() {
   runApp(const MaterialApp(title: 'Navigation Basics', home: MyApp()));
@@ -9,13 +9,6 @@ void main() {
 void printThis() {
   print("TEST");
 }
-
-
-
-
-
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -83,9 +76,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute<void>(
-                      builder: (context) => const FirstRoute(),
-                    ),
+                    MaterialPageRoute<void>(builder: (context) => Message()),
                   );
                 },
               ),

@@ -67,14 +67,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
     return Scaffold(
       appBar: AppBar(title: const Text('Retrieve Text Input')),
       body: Padding(
@@ -83,7 +81,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
           controller: myController,
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.done,
-          // Prevent non-digit characters from being entered.
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           onSubmitted: (value) {
             final parsed = int.tryParse(value);
@@ -96,8 +93,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // When the user presses the button, show an alert dialog containing
-        // the text that the user has entered into the text field.
+      
         onPressed: () {
           ppp(myController.text);
         },

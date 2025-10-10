@@ -77,7 +77,6 @@ class _FirstRouteState extends State<FirstRoute> {
           ),
         ),
 
-        /// Messages page
         ListView.builder(
           reverse: true,
           itemCount: 2,
