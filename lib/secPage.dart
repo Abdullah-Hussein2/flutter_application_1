@@ -34,7 +34,7 @@ class _SecPageState extends State<SecPage> {
             Tooltip(
               message: "Back",
               triggerMode: TooltipTriggerMode.longPress,
-              child: IconButton(
+              child: BackButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -43,7 +43,7 @@ class _SecPageState extends State<SecPage> {
                     ),
                   );
                 },
-                icon: Icon(Icons.backspace, size: 30),
+                
               ),
             ),
           ],

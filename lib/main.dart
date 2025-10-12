@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               ElevatedButton.icon(
                 icon: Icon(Icons.wallet),
-                label: Text('help'),
+                label: Text('deposit'),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton.icon(
                 icon: Icon(Icons.wallet),
-                label: Text('Open'),
+                label: Text('Message'),
                 onPressed: () {
                   Navigator.push(
                     context,
