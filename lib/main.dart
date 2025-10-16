@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/messengermain.dart';
 import 'secPage.dart';
-
+import 'calcmain.dart';
 void main() {
   runApp(const MaterialApp(title: 'Navigation Basics', home: MyApp()));
 }
@@ -66,6 +66,18 @@ class _MyAppState extends State<MyApp> {
                     context,
                     MaterialPageRoute<void>(
                       builder: (context) => const SecPage(),
+                    ),
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                icon: Icon(Icons.wallet),
+                label: Text('Calc'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) =>  const SecPage(),
                     ),
                   );
                 },
