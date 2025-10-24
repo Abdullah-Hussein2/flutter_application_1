@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/messengermain.dart';
 import 'secPage.dart';
-import 'calcmain.dart';
+import 'toters.dart';
+
 void main() {
   runApp(const MaterialApp(title: 'Navigation Basics', home: MyApp()));
 }
@@ -77,7 +78,19 @@ class _MyAppState extends State<MyApp> {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (context) =>  const SecPage(),
+                      builder: (context) => const SecPage(),
+                    ),
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                icon: Icon(Icons.food_bank),
+                label: Text('Toterss'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => const Toters(),
                     ),
                   );
                 },
