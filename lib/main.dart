@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/messengermain.dart';
 import 'secPage.dart';
+import 'loginpage.dart';
 import 'toters.dart';
 
 void main() {
@@ -73,24 +74,24 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton.icon(
                 icon: Icon(Icons.wallet),
-                label: Text('Calc'),
+                label: Text('Toters'),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (context) => const SecPage(),
+                      builder: (context) =>  Toters(),
                     ),
                   );
                 },
               ),
               ElevatedButton.icon(
-                icon: Icon(Icons.food_bank),
-                label: Text('Toterss'),
+                icon: Icon(Icons.login),
+                label: Text('Login Page'),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (context) => const Toters(),
+                      builder: (context) =>  LoginPage(),
                     ),
                   );
                 },
