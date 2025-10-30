@@ -1,19 +1,85 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 
 
+
+class RestaurantsDetails {
+  final int id;
+  final String name;
+  final bool isActive;
+  final String dis;
+
+  const RestaurantsDetails({
+    required this.id,
+    required this.name,
+    required this.isActive,
+    required this.dis,
+  });
+
+
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'isActive': isActive ? 1 : 0,
+      'dis': dis,
+    };
+  }
+
+  factory RestaurantsDetails.fromMap(Map<String, Object?> map) {
+    return RestaurantsDetails(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      isActive: (map['isActive'] as int) == 1,
+      dis: map['dis'] as String? ?? '',
+    );
+  }
+}
+
+late Database database;
+
+void main() async {
+  // Avoid errors caused by flutter upgrade.
+  // Ensure Flutter bindings are initialized before any platform calls.
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Open the database and store the reference in the top-level `database`.
+  database = await openDatabase(
+    // Use a safe filename and the join() helper to construct the path.
+    join(await getDatabasesPath(), 'restaurants_details_database.db'),
+    onCreate: (db, version) {
+      // Include the `dis` column and keep isActive as INTEGER (0/1).
+      return db.execute(
+        'CREATE TABLE RestaurantsDetails(id INTEGER PRIMARY KEY, name TEXT, isActive INTEGER, dis TEXT)',
+      );
+    },
+    version: 1,
+  );
+
+}
+
+void printDbPath() async {
+  final dbPath = await getDatabasesPath();
+  final file = join(dbPath, 'restaurants_details_database.db');
+  print('DB path: $file');
+}
 
 class Toters extends StatefulWidget {
-   Toters({super.key});
+   const Toters({super.key});
 
   @override
   State<Toters> createState() => _TotersState();
 }
 
 class _TotersState extends State<Toters> {
+  int _selectedIndex = -1;
+
   @override
-int _selectedIndex = -1;
   Widget build(BuildContext context) {
   
     return Scaffold(
@@ -38,7 +104,34 @@ int _selectedIndex = -1;
         children: [
           Container(
             color: Colors.grey.shade400,
-            child: SearchBar(),
+            child: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Material(
+              elevation: 2,
+              borderRadius: BorderRadius.circular(12),
+              child: TextField(
+                decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search, color: Colors.grey.shade600),
+                hintText: 'Search restaurants, items or addresses',
+                hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                  VerticalDivider(width: 1, thickness: 1, color: Colors.grey.shade300),
+                  
+                  ],
+                ),
+                ),
+              ),
+              ),
+            ),
           ),
           
           
@@ -138,88 +231,38 @@ Container(
     ),
   ),
 ),
-
-SizedBox(height: 12),
-
-Visibility(
-  visible: _selectedIndex >= 0,
-  child: Card(
-    margin:  EdgeInsets.symmetric(horizontal: 12.0),
-    elevation: 6,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    child: Padding(
-      padding:  EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Selected: #${_selectedIndex + 1}',
-            style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-           SizedBox(height: 8),
-           Text('Short description for the selected item goes here.'),
-           SizedBox(height: 12),
-          Row(
-            children: [
-              ElevatedButton(onPressed: () { }, child:  Text('Action')),
-               SizedBox(width: 8),
-              OutlinedButton(
-                onPressed: () => setState(() => _selectedIndex = -1),
-                child:  Text('Close'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  ),
-),
-            
-         SizedBox(height: 22),
-
-        Visibility(
-          visible: _selectedIndex >= 0,
-          child: Card(
-            margin:  EdgeInsets.symmetric(horizontal: 12.0),
-            elevation: 6,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: Padding(
-              padding:  EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Selected: #${_selectedIndex + 1}',
-                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                   SizedBox(height: 8),
-                   Text('Short description for the selected item goes here.'),
-                   SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        child: Image(image: NetworkImage("https://thumbs.dreamstime.com/b/unhealthy-fast-food-delivery-menu-featuring-assorted-burgers-cheeseburgers-nuggets-french-fries-soda-high-calorie-low-356045884.jpg"))),
-                      ElevatedButton(onPressed: () { }, child:  Text('Action')),
-                       SizedBox(width: 8),
-                      OutlinedButton(
-                        onPressed: () => setState(() => _selectedIndex = -1),
-                        child:  Text('Close'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-
         
+        Column(
+          children: [
+            for (int i = 0; i < 4 ; i++)
+            
+            Container(
+              width: 400,
+              height: 100,
+              child: Visibility(
+                visible:  _selectedIndex == 0 ,
+                child: InkWell(
+                  onTap: () {
+                    print("hellow");
+                  },
+                  child: Card(
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                    ),
+                  ),
+                ),
+                ),
+            )
+          ],
+        )
         ],
+        
       ),
+      
       
       
     );
   }
 }
+
+
